@@ -1,0 +1,85 @@
+:root:not([inFullscreen], [inDOMFullscreen], [customizing])
+body:has(> #browser > :is(#sidebar-container, #sidebar-main):not([hidden]),
+         > #browser > #sidebar-box:not([hidden])) {
+  display: grid !important;
+  grid-template-columns: auto auto auto auto minmax(0, 1fr) auto auto;
+  grid-template-rows: auto auto auto auto auto minmax(0, 1fr);
+  grid-template-areas:
+  "menubar menubar menubar menubar menubar menubar menubar"
+  "tabbar  tabbar  tabbar  tabbar  tabbar  tabbar  tabbar"
+  "navbar  navbar  navbar  navbar  navbar  navbar  navbar"
+  "sidebar lsplit  bmbar   bmbar   bmbar   bmbar   bmbar"
+  "sidebar lsplit  notif   notif   notif   notif   notif"
+  "sidebar lsplit  panel   psplit  content aisplit aibox";
+         }
+
+         :root:not([inFullscreen], [inDOMFullscreen], [customizing])
+         body:has(> #browser > :is(#sidebar-container, #sidebar-main, #sidebar-box)[sidebar-positionend]:not([hidden])) {
+           grid-template-columns: auto auto minmax(0, 1fr) auto auto auto auto;
+           grid-template-areas:
+           "menubar menubar menubar menubar menubar menubar menubar"
+           "tabbar  tabbar  tabbar  tabbar  tabbar  tabbar  tabbar"
+           "navbar  navbar  navbar  navbar  navbar  navbar  navbar"
+           "bmbar   bmbar   bmbar   bmbar   bmbar   lsplit  sidebar"
+           "notif   notif   notif   notif   notif   lsplit  sidebar"
+           "aibox   aisplit content psplit  panel   lsplit  sidebar";
+         }
+
+         :root:not([inFullscreen], [inDOMFullscreen], [customizing])
+         body:has(> #browser > :is(#sidebar-container, #sidebar-main):not([hidden]),
+                  > #browser > #sidebar-box:not([hidden]))
+         > :is(#navigator-toolbox, #browser) {
+           display: contents !important;
+         }
+
+         #ai-window-splitter[collapsed],
+         #ai-window-box[collapsed] {
+         display: none !important;
+         }
+
+         #toolbar-menubar       { grid-area: menubar; }
+         #TabsToolbar           { grid-area: tabbar;  }
+         #nav-bar               { grid-area: navbar;  }
+         #PersonalToolbar       { grid-area: bmbar;   }
+         #notifications-toolbar { grid-area: notif;   }
+         :is(#sidebar-container, #sidebar-main) { grid-area: sidebar; }
+         #sidebar-launcher-splitter { grid-area: lsplit;  }
+         #sidebar-box               { grid-area: panel;   }
+         #sidebar-splitter          { grid-area: psplit;  }
+         #tabbrowser-tabbox         { grid-area: content; }
+         #ai-window-splitter        { grid-area: aisplit; }
+         #ai-window-box             { grid-area: aibox;   }
+
+         #a11y-announcement {
+         grid-row: 7;
+         max-height: 0;
+         overflow: clip;
+         }
+
+         :root[theme-image-in-toolbox]:not([inFullscreen], [inDOMFullscreen], [customizing])
+         body:has(> #browser > :is(#sidebar-container, #sidebar-main):not([hidden]),
+                  > #browser > #sidebar-box:not([hidden]))
+         > #navigator-toolbox > toolbar {
+           background-image: var(--toolbox-background-image) !important;
+           background-repeat: var(--toolbox-background-repeat) !important;
+           background-position: var(--toolbox-background-position) !important;
+           background-size: var(--toolbox-background-size) !important;
+           background-attachment: fixed !important;
+         }
+
+         :root:not([inFullscreen], [inDOMFullscreen], [customizing])
+         body:has(> #navigator-toolbox:not([tabs-hidden])):has(
+           > #browser > :is(#sidebar-container, #sidebar-main):not([hidden]),
+                                                               > #browser > #sidebar-box:not([hidden]))
+         > #browser > :is(#sidebar-container, #sidebar-main, #sidebar-launcher-splitter,
+                          #sidebar-box, #sidebar-splitter, #ai-window-splitter, #ai-window-box) {
+                          background-color: var(--toolbar-background-color);
+                          }
+
+                          :root:not([inFullscreen], [inDOMFullscreen], [customizing])
+                          body:has(> #navigator-toolbox:not([tabs-hidden])):has(
+                            > #browser > :is(#sidebar-container, #sidebar-main):not([hidden]),
+                                                                                > #browser > #sidebar-box:not([hidden]))
+                          > #browser > :is(#sidebar-launcher-splitter, #sidebar-splitter, #ai-window-splitter):hover {
+                            background-color: var(--focus-outline-color);
+                          }
